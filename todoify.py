@@ -215,7 +215,7 @@ def loop():
                              break
                          else:
                              message+=wordline[i]
-          openai.api_key = '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'
+          openai.api_key = '' #USE YOUR API KEY HERE.it costs around $5.90(varies depending on your region of purchase)
           messages=[{"role":"system","content":
                 "you are a teacher"}]
          # Define the prompt you want to send to the model
