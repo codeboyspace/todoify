@@ -1,3 +1,5 @@
+#some import lines in this program are unwanted and not used inside the program.
+
 import time
 import sys
 import os
@@ -10,39 +12,9 @@ import pyautogui
 import pygetwindow as gw
 import datetime
 from tkinter import Tk, Label
-# This part of code is actually to be implemented once the program need end its usage
 # Here the there will be a todo / given as the prompt to the API then the response will displayed using tkinter window as a pop-up
 
 #The below code is the main window UI Design functionalities due to lack of API GPT4.This is just a local deployment of Personal TO-DO list AI
-
-print("Requesting Openai.servers")
-sleep2.sleep(1)
-print("Fetching APIs")
-sleep2.sleep(1)
-print("Connected..wait please don't interrupt with your keyboard or any HID device")
-with open("logs.txt",'r')as sortedword:
-     wordline=sortedword.readlines(1)
-     message=""
-     for i in range(len(wordline)):
-                    if wordline[i].isnumeric():
-                        break
-                    else:
-                        message+=wordline[i]
-     openai.api_key = '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'
-     messages=[{"role":"system","content":
-           "you are a teacher"}]
-    # Define the prompt you want to send to the model
-     if message:
-        messages.append(
-                    {"role":"user","content":"How to make in 5 steps"+message},
-                )
-        chat=openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",messages=messages
-                )
-        global responseoftodoify
-        responseoftodoify=chat.choices[0].message.content
-print("OpenAI response received successfully...")
-sleep2.sleep(2)
 def loop():
     window = Tk()
     def writer():
@@ -70,6 +42,7 @@ def loop():
                                 indexVal+=1
                                 yPosition+=17
     writer()
+    #this part of program will read the existing local file and depending on that it returns 2 workaples for tkinter window
     def title():
         with open("logs.txt",'r')as Reader2:
                 global readlinesMain
@@ -96,7 +69,7 @@ def loop():
     entry.bind('<FocusOut>', on_focus_out)
     entry.config(fg='grey',bg='black')  # Set default text color to grey
     
-    def onclick_run():
+    def onclick_run():#this onclick() function will run if a user taps on submit button on the window
         global submit
         submit =tk.Button(window, text="Done", font=("Comic Sans", 10), fg="#00FF00", bg="black",
                     activebackground="#00FF00", activeforeground="black", command=on_submit)
@@ -107,7 +80,7 @@ def loop():
         delete.place(x=210, y=95)
         entry.place(x=150, y=70)    
 
-    window.title("TO-DO Ai")
+    window.title("TO-DO Ai")#Design and looks of window of tkinter framework
     window.geometry("420x420")
 
     window.config(background="#2B2B2B")
@@ -163,10 +136,6 @@ def loop():
                     loginwindow.place(x=0,y=epudra)
                     indexVal+=1
                     epudra+=17
-    #now the program is paused at stage of reading the logs.txt and writing it to the window using loop this can be done both animatically and normally
-    #CONTINUE with placing labels as just changing the "place(x,y)" values and (text=) using loop increment and file accessing.
-    #the last you code since for this project is Dec 13th 6:37:00
-                    
     def popup():
         window.deiconify()
         window.lift()
@@ -233,5 +202,33 @@ def loop():
                     gptrunner(responseoftodoify,logtime)
     window.after(5000,popup)
     window.mainloop()
+     print("Requesting Openai.servers")
+     sleep2.sleep(1)
+     print("Fetching APIs")
+     sleep2.sleep(1)
+     print("Connected..wait please don't interrupt with your keyboard or any HID device")
+     with open("logs.txt",'r')as sortedword:
+          wordline=sortedword.readlines(1)
+          message=""
+          for i in range(len(wordline)):
+                         if wordline[i].isnumeric():
+                             break
+                         else:
+                             message+=wordline[i]
+          openai.api_key = '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'
+          messages=[{"role":"system","content":
+                "you are a teacher"}]
+         # Define the prompt you want to send to the model
+          if message:
+             messages.append(
+                         {"role":"user","content":"How to make in 5 steps"+message},
+                     )
+             chat=openai.ChatCompletion.create(
+                         model="gpt-3.5-turbo",messages=messages
+                     )
+             global responseoftodoify
+             responseoftodoify=chat.choices[0].message.content
+     print("OpenAI response received successfully...")
+     sleep2.sleep(2)
     openOnTime()
 loop()
